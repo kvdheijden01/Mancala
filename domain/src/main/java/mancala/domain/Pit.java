@@ -32,10 +32,10 @@ public class Pit extends Kalaha {
 
     @Override
     public void checkResultsOfMove() {
-    switchActivePlayer();
     if (stones == 1) {
         stealStones();
     }
+    switchActivePlayer();
     }
 
     private void switchActivePlayer() {
@@ -48,11 +48,19 @@ public class Pit extends Kalaha {
         getOpposite().stones = getOpposite().stones + stonesToPass;
         stonesToPass = getOpposite().stones;
         getOpposite().stones = 0;
-        for (int i = 0; i < 14; i++) {
+        for (int i = 1; i <= 14; i++) {
+            this.goToNeighbour(i).depositStolenStones(stonesToPass);
             
         }
 
     }
+
+    @Override
+    public void depositStolenStones(int stonesToPass) {
+        
+    }
+
+
 
     // These methods are used for testing.
     public void setStones(int stones) {

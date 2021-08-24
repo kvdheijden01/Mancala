@@ -87,13 +87,17 @@ public class PitTest {
     }
 
     @Test
-    public void aPitMovesItAndItsOppositeIntoTheKalahaOfTheCurrentPlayer() {
+    public void aPitMovesItAndItsOppositesStonesIntoTheKalahaOfTheStealingPlayer() {
         Kalaha field = new Kalaha();
         ((Pit) field.getNeighbour()).setOppositeField();
         ((Pit) field.goToNeighbour(6)).setStones(0);
         ((Pit) field.goToNeighbour(2)).doMove();
         assertEquals(0, field.goToNeighbour(6).getOpposite().getStones());
+        assertEquals(5, field.goToNeighbour(5).getStones());
         assertEquals(5, field.goToNeighbour(7).getStones());
+        assertEquals(0, field.goToNeighbour(14).getStones());
+        assertEquals(4, field.goToNeighbour(9).getStones());
+
     }
 
 

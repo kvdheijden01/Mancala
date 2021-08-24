@@ -61,30 +61,40 @@ public class Kalaha {
 
     protected void passStones(int n) {
         if (n > 0 && this instanceof Pit) {
-            int stonesToPass = n;
-            stones = stones - n;
-            getNeighbour().stones = getNeighbour().stones + stonesToPass;
-            n--;
-            getNeighbour().passStones(n);
+            passStonesToNeighbour(n);
         } else if (n > 0 && this instanceof Kalaha) {
             if (owner.getActivePlayer().equals(owner)) {
-                int stonesToPass = n;
-                stones = stones - n;
-                getNeighbour().stones = getNeighbour().stones + stonesToPass;
-                n--;
-                getNeighbour().passStones(n);
+                passStonesToNeighbour(n);
             } else {
-                stones = stones - (n+1);
-                getNeighbour().stones = getNeighbour().stones + (n+1);
-                getNeighbour().passStones(n);
+                skipPassingStonesOneField(n);
             }
         } else if (n == 0) {
             checkResultsOfMove();
         }
     }
 
+    private void passStonesToNeighbour(int n) {
+        int stonesToPass = n;
+        stones = stones - n;
+        getNeighbour().stones = getNeighbour().stones + stonesToPass;
+        n--;
+        getNeighbour().passStones(n);
+    }
+
+    private void skipPassingStonesOneField(int n) {
+        stones = stones - (n+1);
+        getNeighbour().stones = getNeighbour().stones + (n+1);
+        getNeighbour().passStones(n);
+    }
+
     public void checkResultsOfMove() {
 
+    }
+
+    public void depositStolenStones(int stonesToPass) {
+        if (owner.equals(owner.getActivePlayer())) {
+            stones = stones + stonesToPass;
+        }
     }
 
     // THese methods are used for testing
