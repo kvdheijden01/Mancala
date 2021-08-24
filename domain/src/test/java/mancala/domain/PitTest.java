@@ -1,7 +1,5 @@
 package mancala.domain;
 
-import java.util.ArrayList;
-
 // Your test class should be in the same 
 // package as the class you're testing.
 // Usually the test directory mirrors the
