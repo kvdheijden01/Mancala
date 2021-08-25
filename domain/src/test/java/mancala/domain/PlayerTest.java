@@ -37,7 +37,46 @@ public class PlayerTest {
     public void theActivePlayerisSetToP1() {
         Kalaha field = new Kalaha();
         ((Pit) field.getNeighbour()).setOppositeField();
-        assertEquals("P1",field.goToNeighbour(1).getOwner().getActivePlayer().getName());
+        assertEquals(true,field.goToNeighbour(1).getOwner().getActive());
+    }
+
+    @Test
+    public void anEmptyBoardP1InitiatesEndstate() {
+        Kalaha field = new Kalaha();
+        ((Pit) field.getNeighbour()).setOppositeField();
+        ((Pit) field.goToNeighbour(1)).setStones(0);
+        ((Pit) field.goToNeighbour(2)).setStones(0);
+        ((Pit) field.goToNeighbour(3)).setStones(0);
+        ((Pit) field.goToNeighbour(4)).setStones(0);
+        ((Pit) field.goToNeighbour(5)).setStones(0);
+        ((Pit) field.goToNeighbour(6)).doMove();
+        assertEquals(true, field.goToNeighbour(6).getOwner().endstate);
+    }
+
+    @Test
+    public void anEmptyBoardP2InitiatesEndstate() {
+        Kalaha field = new Kalaha();
+        ((Pit) field.getNeighbour()).setOppositeField();
+        ((Pit) field.goToNeighbour(8)).setStones(0);
+        ((Pit) field.goToNeighbour(9)).setStones(0);
+        ((Pit) field.goToNeighbour(12)).setStones(0);
+        ((Pit) field.goToNeighbour(10)).setStones(0);
+        ((Pit) field.goToNeighbour(11)).setStones(0);
+        ((Pit) field.goToNeighbour(13)).doMove();
+        assertEquals(true, field.goToNeighbour(6).getOwner().endstate);
+    }
+
+    @Test
+    public void aBoardWithStonesDoesNotInitiateEndstate() {
+        Kalaha field = new Kalaha();
+        ((Pit) field.getNeighbour()).setOppositeField();
+        ((Pit) field.goToNeighbour(1)).setStones(1);
+        ((Pit) field.goToNeighbour(2)).setStones(0);
+        ((Pit) field.goToNeighbour(3)).setStones(0);
+        ((Pit) field.goToNeighbour(4)).setStones(0);
+        ((Pit) field.goToNeighbour(5)).setStones(0);
+        ((Pit) field.goToNeighbour(6)).doMove();
+        assertEquals(false, field.goToNeighbour(6).getOwner().endstate);
     }
     
 }

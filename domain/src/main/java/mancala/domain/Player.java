@@ -1,20 +1,24 @@
 package mancala.domain;
 
 public class Player {
-    private static Player activePlayer;
+    private boolean active;
     private Player opponent;
     private String name;
+
+    public boolean endstate;
 
     public Player() {
         this.name = "P2";
         this.opponent = new Player(this);
-        activePlayer = this.opponent;
+        active = false;
+        endstate = false;
 
     }
 
     public Player(Player opponent) {
         this.name = "P1";
         this.opponent = opponent;
+        this.active = true;
     }
 
 
@@ -22,16 +26,25 @@ public class Player {
         return opponent;
     }
 
-    public Player getActivePlayer() {
-        return activePlayer;
+    public boolean getActive() {
+        return active;
     }
 
-    public void setActivePlayer(Player activePlayer) {
-        this.activePlayer = activePlayer;
+    public void setActive() {
+        if (active) {
+            active = false;
+        } else {
+            active = true;
+        }
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setEndstate() {
+        endstate = true;
+
     }
 
 }

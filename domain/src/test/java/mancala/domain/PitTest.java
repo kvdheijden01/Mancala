@@ -57,9 +57,9 @@ public class PitTest {
     @Test
     public void endingInAPitSwitchesActivePlayer() {
         Kalaha field = new Kalaha();
-        assertEquals("P1",field.getOwner().getActivePlayer().getName());
+        assertEquals(true,field.getNeighbour().getOwner().getActive());
         ((Pit) field.goToNeighbour(1)).doMove();
-        assertEquals("P2",field.getOwner().getActivePlayer().getName());
+        assertEquals(false,field.getNeighbour().getOwner().getActive());
     }
 
     @Test

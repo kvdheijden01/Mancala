@@ -36,10 +36,12 @@ public class Pit extends Kalaha {
         stealStones();
     }
     switchActivePlayer();
+    checkEndstate();
     }
 
     private void switchActivePlayer() {
-        getOwner().setActivePlayer(getOwner().getOpponent());
+        this.getOwner().setActive();
+        this.getOwner().getOpponent().setActive();
     }
 
     private void stealStones() {
@@ -60,7 +62,23 @@ public class Pit extends Kalaha {
         
     }
 
+    @Override
+    public void passStones(int n) {
+        if (n > 0) {
+            passStonesToNeighbour(n);
+        } else if (n == 0) {
+            checkResultsOfMove();
+            
+        }
+    }
 
+    @Override
+    public int checkIfEmpty(int count) {
+        if (this.stones == 0) {
+            count++;
+        }
+        return count;
+    }
 
     // These methods are used for testing.
     public void setStones(int stones) {

@@ -49,9 +49,9 @@ public class KalahaTest {
     @Test
     public void endingInYourKalahaDoesNotSwitchActivePlayer() {
         Kalaha field = new Kalaha();
-        assertEquals("P1",field.getOwner().getActivePlayer().getName());
+        assertEquals(true,field.getNeighbour().getOwner().getActive());
         ((Pit) field.goToNeighbour(3)).doMove();
-        assertEquals("P1",field.getOwner().getActivePlayer().getName());
+        assertEquals(true,field.getNeighbour().getOwner().getActive());
     }
 
 }

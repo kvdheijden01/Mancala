@@ -59,21 +59,20 @@ public class Kalaha {
         this.opposite = opposite;
     }
 
-    protected void passStones(int n) {
-        if (n > 0 && this instanceof Pit) {
-            passStonesToNeighbour(n);
-        } else if (n > 0 && this instanceof Kalaha) {
-            if (owner.getActivePlayer().equals(owner)) {
+    public void passStones(int n) {
+        if (n > 0) {
+            if (owner.getActive()) {
                 passStonesToNeighbour(n);
             } else {
                 skipPassingStonesOneField(n);
             }
         } else if (n == 0) {
             checkResultsOfMove();
+            
         }
     }
 
-    private void passStonesToNeighbour(int n) {
+    public void passStonesToNeighbour(int n) {
         int stonesToPass = n;
         stones = stones - n;
         getNeighbour().stones = getNeighbour().stones + stonesToPass;
@@ -88,11 +87,33 @@ public class Kalaha {
     }
 
     public void checkResultsOfMove() {
+        checkEndstate();
 
     }
 
+    public void checkEndstate() {
+        checkPlayerHalf(owner);
+        checkPlayerHalf(owner.getOpponent());
+    }
+
+    public void checkPlayerHalf(Player player) {
+        int count = 0;
+        for (int i = 0; i < 14; i++) {
+            if (this.goToNeighbour(i).getOwner().equals(player)) {
+                count = this.goToNeighbour(i).checkIfEmpty(count);
+            }
+        }
+        if (count == 6) {
+            owner.setEndstate();
+        }
+    }
+
+    public int checkIfEmpty(int count) {
+        return count;
+    }
+
     public void depositStolenStones(int stonesToPass) {
-        if (owner.equals(owner.getActivePlayer())) {
+        if (owner.getActive()) {
             stones = stones + stonesToPass;
         }
     }
