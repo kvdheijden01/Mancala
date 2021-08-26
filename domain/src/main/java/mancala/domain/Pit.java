@@ -33,7 +33,7 @@ public class Pit extends Kalaha {
     }
 
     @Override
-    public void checkResultsOfMove() {
+    protected void checkResultsOfMove() {
     if (stones == 1) {
         stealStones();
     }
@@ -60,12 +60,7 @@ public class Pit extends Kalaha {
     }
 
     @Override
-    public void depositStolenStones(int stonesToPass) {
-        
-    }
-
-    @Override
-    public void passStones(int n) {
+    protected void passStones(int n) {
         if (n > 0) {
             passStonesToNeighbour(n);
         } else if (n == 0) {
@@ -75,12 +70,17 @@ public class Pit extends Kalaha {
     }
 
     @Override
-    public boolean hasGameEnded() {
+    protected boolean hasGameEnded() {
         if (stones == 0) {
             return getNeighbour().hasGameEnded();
         } else {
             return false;
         }
+    }
+
+    @Override
+    protected void depositStolenStones(int stonesToPass) {
+        
     }
 
     @Override

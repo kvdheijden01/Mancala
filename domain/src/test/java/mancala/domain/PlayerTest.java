@@ -54,19 +54,6 @@ public class PlayerTest {
     }
 
     @Test
-    public void anEmptyBoardP2InitiatesEndstate() {
-        Kalaha field = new Kalaha();
-        ((Pit) field.getNeighbour()).setOppositeField();
-        ((Pit) field.goToNeighbour(8)).setStones(0);
-        ((Pit) field.goToNeighbour(9)).setStones(0);
-        ((Pit) field.goToNeighbour(12)).setStones(0);
-        ((Pit) field.goToNeighbour(10)).setStones(0);
-        ((Pit) field.goToNeighbour(11)).setStones(0);
-        ((Pit) field.goToNeighbour(13)).doMove();
-        assertEquals(true, field.getOwner().endstate);
-    }
-
-    @Test
     public void aBoardWithStonesDoesNotInitiateEndstate() {
         Kalaha field = new Kalaha();
         ((Pit) field.getNeighbour()).setOppositeField();
@@ -121,5 +108,26 @@ public class PlayerTest {
         ((Pit) field.goToNeighbour(5)).setStones(0);
         ((Pit) field.goToNeighbour(6)).doMove();
         assertEquals(true, field.getOwner().getPlayerHasWon());
+    }
+
+    @Test
+    public void equalScoreResutlsInADraw() {
+        Kalaha field = new Kalaha();
+        ((Pit) field.getNeighbour()).setOppositeField();
+        ((Pit) field.goToNeighbour(1)).setStones(0);
+        ((Pit) field.goToNeighbour(2)).setStones(0);
+        ((Pit) field.goToNeighbour(3)).setStones(0);
+        ((Pit) field.goToNeighbour(4)).setStones(0);
+        ((Pit) field.goToNeighbour(5)).setStones(0);
+        ((Pit) field.goToNeighbour(6)).setStones(1);
+        ((Pit) field.goToNeighbour(8)).setStones(0);
+        ((Pit) field.goToNeighbour(9)).setStones(0);
+        ((Pit) field.goToNeighbour(12)).setStones(0);
+        ((Pit) field.goToNeighbour(10)).setStones(0);
+        ((Pit) field.goToNeighbour(11)).setStones(0);
+        ((Pit) field.goToNeighbour(13)).setStones(1);
+        ((Pit) field.goToNeighbour(6)).doMove();
+        assertEquals(true, field.getNeighbour().getOwner().getGameDraw());
+        assertEquals(false, field.getOwner().getPlayerHasWon());
     }
 }

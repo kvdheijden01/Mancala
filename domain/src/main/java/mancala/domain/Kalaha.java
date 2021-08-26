@@ -59,7 +59,7 @@ public class Kalaha {
         this.opposite = opposite;
     }
 
-    public void passStones(int n) {
+    protected void passStones(int n) {
         if (n > 0) {
             if (owner.isActive()) {
                 passStonesToNeighbour(n);
@@ -72,7 +72,7 @@ public class Kalaha {
         }
     }
 
-    public void passStonesToNeighbour(int n) {
+    protected void passStonesToNeighbour(int n) {
         int stonesToPass = n;
         stones = stones - n;
         getNeighbour().stones = getNeighbour().stones + stonesToPass;
@@ -86,16 +86,16 @@ public class Kalaha {
         getNeighbour().passStones(n);
     }
 
-    public void checkResultsOfMove() {
+    protected void checkResultsOfMove() {
         checkEndstate();
 
     }
 
-    public boolean hasGameEnded() {
+    protected boolean hasGameEnded() {
         return true;
     }
 
-    public void depositStolenStones(int stonesToPass) {
+    protected void depositStolenStones(int stonesToPass) {
         if (owner.isActive()) {
             stones = stones + stonesToPass;
         }

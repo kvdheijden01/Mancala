@@ -46,6 +46,10 @@ public class Player {
         return playerHasWon;
     }
 
+    public boolean getGameDraw() {
+        return gameDraw;
+    }
+
     public int getfinalScore() {
         return finalScore;
     }
