@@ -61,7 +61,7 @@ public class Kalaha {
 
     public void passStones(int n) {
         if (n > 0) {
-            if (owner.getActive()) {
+            if (owner.isActive()) {
                 passStonesToNeighbour(n);
             } else {
                 skipPassingStonesOneField(n);
@@ -91,31 +91,43 @@ public class Kalaha {
 
     }
 
-    public void checkEndstate() {
-        checkPlayerHalf(owner);
-        checkPlayerHalf(owner.getOpponent());
-    }
-
-    public void checkPlayerHalf(Player player) {
-        int count = 0;
-        for (int i = 0; i < 14; i++) {
-            if (this.goToNeighbour(i).getOwner().equals(player)) {
-                count = this.goToNeighbour(i).checkIfEmpty(count);
-            }
-        }
-        if (count == 6) {
-            owner.setEndstate();
-        }
-    }
-
-    public int checkIfEmpty(int count) {
-        return count;
+    public boolean hasGameEnded() {
+        return true;
     }
 
     public void depositStolenStones(int stonesToPass) {
-        if (owner.getActive()) {
+        if (owner.isActive()) {
             stones = stones + stonesToPass;
         }
+    }
+
+    public Kalaha goToFirstPit(Player player) {
+        if (owner.equals(player.getOpponent())) {
+            return getNeighbour();
+        } else {
+            return getNeighbour().goToFirstPit(player);
+        }
+    }
+
+    public void checkEndstate() {
+        if (goToFirstPit(owner).hasGameEnded()) {
+            owner.endstate = true;
+            getScore();
+            owner.determineWinner();
+        } else if (goToFirstPit(owner.getOpponent()).hasGameEnded()) {
+            owner.getOpponent().endstate = true;
+            getScore();
+            owner.determineWinner();
+        }
+    }
+
+    public void getScore() {
+        owner.setFinalScore(goToFirstPit(owner).countScore());
+        owner.getOpponent().setFinalScore(goToFirstPit(owner.getOpponent()).countScore());
+    }
+
+    protected int countScore() {
+        return stones;
     }
 
     // THese methods are used for testing

@@ -6,19 +6,27 @@ public class Player {
     private String name;
 
     public boolean endstate;
+    private int finalScore;
+    private boolean playerHasWon;
+    private boolean gameDraw;
 
     public Player() {
-        this.name = "P2";
-        this.opponent = new Player(this);
+        name = "P2";
+        opponent = new Player(this);
         active = false;
         endstate = false;
+        finalScore = 0;
+        playerHasWon = false;
 
     }
 
     public Player(Player opponent) {
-        this.name = "P1";
+        name = "P1";
         this.opponent = opponent;
-        this.active = true;
+        active = true;
+        endstate = false;
+        finalScore = 0;
+        playerHasWon = false;
     }
 
 
@@ -26,8 +34,28 @@ public class Player {
         return opponent;
     }
 
-    public boolean getActive() {
+    public boolean isActive() {
         return active;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean getPlayerHasWon() {
+        return playerHasWon;
+    }
+
+    public int getfinalScore() {
+        return finalScore;
+    }
+
+    public void setPlayerHasWon() {
+        playerHasWon = true;
+    }
+
+    public void setGameDraw() {
+        gameDraw = true;
     }
 
     public void setActive() {
@@ -38,13 +66,19 @@ public class Player {
         }
     }
 
-    public String getName() {
-        return name;
+    public void determineWinner() {
+        if (finalScore > opponent.getfinalScore()) {
+            playerHasWon = true;
+        } else if (finalScore < opponent.getfinalScore()) {
+            opponent.setPlayerHasWon();
+        } else if (finalScore == opponent.getfinalScore()) {
+            gameDraw = true;
+            opponent.setGameDraw();
+        }
     }
 
-    public void setEndstate() {
-        endstate = true;
-
+    public void setFinalScore(int finalScore) {
+        this.finalScore = finalScore;
     }
 
 }

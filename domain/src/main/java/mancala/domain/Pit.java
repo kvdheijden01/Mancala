@@ -26,8 +26,10 @@ public class Pit extends Kalaha {
     }
 
     public void doMove() {
-        int n = stones;
-        this.passStones(n);
+        if (getOwner().isActive()) {
+            int n = stones;
+            this.passStones(n);
+        }
     }
 
     @Override
@@ -73,11 +75,22 @@ public class Pit extends Kalaha {
     }
 
     @Override
-    public int checkIfEmpty(int count) {
-        if (this.stones == 0) {
-            count++;
+    public boolean hasGameEnded() {
+        if (stones == 0) {
+            return getNeighbour().hasGameEnded();
+        } else {
+            return false;
         }
-        return count;
+    }
+
+    @Override
+    protected int countScore() {
+        return stones + getNeighbour().countScore();
+    }
+
+    @Override
+    public Kalaha goToFirstPit(Player player) {
+        return getNeighbour().goToFirstPit(player);
     }
 
     // These methods are used for testing.
