@@ -58,6 +58,7 @@ public class PitTest {
     public void endingInAPitSwitchesActivePlayer() {
         Kalaha field = new Kalaha();
         assertEquals(true,field.getNeighbour().getOwner().isActive());
+        ((Pit) field.goToNeighbour(5)).setStones(0);
         ((Pit) field.goToNeighbour(1)).doMove();
         assertEquals(false,field.getNeighbour().getOwner().isActive());
     }
@@ -65,10 +66,19 @@ public class PitTest {
     @Test
     public void endingInAnEmptyPitMovesStonesToTheOpositePit() {
         Kalaha field = new Kalaha();
+        assertEquals(true, field.getNeighbour().getOwner().isActive());
         ((Pit) field.getNeighbour()).setOppositeField();
-        ((Pit) field.goToNeighbour(6)).setStones(0);
-        ((Pit) field.goToNeighbour(2)).doMove();
-        assertEquals(0, field.goToNeighbour(6).getStones());
+        ((Pit) field.goToNeighbour(5)).setStones(0);
+        ((Pit) field.goToNeighbour(1)).doMove();
+
+        assertEquals(false,field.getNeighbour().getOwner().isActive());
+        assertEquals(0, field.goToNeighbour(5).getStones());
+    }
+
+    @Test
+    public void neighbour() {
+        Kalaha field = new Kalaha();
+        assertEquals(field.goToNeighbour(1),field.getNeighbour());
     }
 
     @Test

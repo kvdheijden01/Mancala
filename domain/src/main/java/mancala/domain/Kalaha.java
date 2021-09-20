@@ -60,33 +60,30 @@ public class Kalaha {
     }
 
     protected void passStones(int n) {
-        if (n > 0) {
+        if (n > 1) {
             if (owner.isActive()) {
                 passStonesToNeighbour(n);
             } else {
                 skipPassingStonesOneField(n);
             }
-        } else if (n == 0) {
+        } else if (n == 1) {
+            stones++;
             checkResultsOfMove();
             
         }
     }
 
     protected void passStonesToNeighbour(int n) {
-        int stonesToPass = n;
-        stones = stones - n;
-        getNeighbour().stones = getNeighbour().stones + stonesToPass;
+        stones++;
         n--;
         getNeighbour().passStones(n);
     }
 
     private void skipPassingStonesOneField(int n) {
-        stones = stones - (n+1);
-        getNeighbour().stones = getNeighbour().stones + (n+1);
         getNeighbour().passStones(n);
     }
 
-    protected void checkResultsOfMove() {
+    public void checkResultsOfMove() {
         checkEndstate();
 
     }

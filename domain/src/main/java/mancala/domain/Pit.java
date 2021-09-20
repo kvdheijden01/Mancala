@@ -28,13 +28,14 @@ public class Pit extends Kalaha {
     public void doMove() {
         if (getOwner().isActive()) {
             int n = stones;
-            this.passStones(n);
+            stones = 0;
+            getNeighbour().passStones(n);
         }
     }
 
     @Override
-    protected void checkResultsOfMove() {
-    if (stones == 1) {
+    public void checkResultsOfMove() {
+    if ((super.stones == 1) && getOwner().isActive()) {
         stealStones();
     }
     switchActivePlayer();
@@ -46,9 +47,9 @@ public class Pit extends Kalaha {
         this.getOwner().getOpponent().setActive();
     }
 
-    private void stealStones() {
+    protected void stealStones() {
         int stonesToPass = stones;
-        stones = 0;
+        this.stones = 0;
         getOpposite().stones = getOpposite().stones + stonesToPass;
         stonesToPass = getOpposite().stones;
         getOpposite().stones = 0;
@@ -61,9 +62,10 @@ public class Pit extends Kalaha {
 
     @Override
     protected void passStones(int n) {
-        if (n > 0) {
+        if (n > 1) {
             passStonesToNeighbour(n);
-        } else if (n == 0) {
+        } else if (n == 1) {
+            stones++;
             checkResultsOfMove();
             
         }

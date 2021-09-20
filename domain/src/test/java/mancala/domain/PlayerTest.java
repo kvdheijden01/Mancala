@@ -9,6 +9,9 @@ package mancala.domain;
 // Import our test dependencies. We import the Test-attribute
 // and a set of assertions.
 import org.junit.jupiter.api.Test;
+
+import jdk.internal.jshell.tool.resources.version;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
