@@ -1,8 +1,13 @@
 package mancala.domain;
 
 public class MancalaImpl implements Mancala {
+    Kalaha board;
+
     public MancalaImpl() {
         // Initialize the game here.
+        this.board = new Kalaha();
+        ((Pit) board.getNeighbour()).setOppositeField();
+        
     }
 
     @Override

@@ -11,7 +11,7 @@ export function Play({ gameState, setGameState }: PlayProps) {
     return (
         <div>
             <p>{gameState.players[0].name} vs {gameState.players[1].name}</p>
-            To do...
+            {gameState.players[0].pits[0].nrOfStones}
         </div>
     )
 }
