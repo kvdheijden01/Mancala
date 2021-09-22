@@ -109,9 +109,11 @@ public class Kalaha {
     public void checkEndstate() {
         if (goToFirstPit(owner).hasGameEnded()) {
             owner.endstate = true;
+            owner.getOpponent().endstate = true;
             getScore();
             owner.determineWinner();
         } else if (goToFirstPit(owner.getOpponent()).hasGameEnded()) {
+            owner.endstate = true;
             owner.getOpponent().endstate = true;
             getScore();
             owner.determineWinner();
