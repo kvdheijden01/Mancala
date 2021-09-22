@@ -27,7 +27,7 @@ public class MancalaImpl implements Mancala {
     }
 
     @Override
-	public void playPit(int index) throws MancalaException {
+	public void playPit(int index) {
         // Implement playing a pit.
         ((Pit) board.goToNeighbour(index + 1)).doMove();
     }
