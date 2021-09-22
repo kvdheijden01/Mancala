@@ -32,11 +32,19 @@ export function Play({ gameState, setGameState }: PlayProps) {
                 }
     }
 
+    function displayActivePlayer() {    
+        if (gameState.players[0].hasTurn) {
+            return gameState.players[0].name;
+        } else if (gameState.players[1].hasTurn) {
+            return gameState.players[1].name;
+        }
+    }
+
     return (
         <div>
             <p>{gameState.players[0].name} vs {gameState.players[1].name}</p>
 
-            <p>Active Player: {}</p>
+            <p>Active Player: {displayActivePlayer()}</p>
             <table>
             <tbody>
             <tr>
