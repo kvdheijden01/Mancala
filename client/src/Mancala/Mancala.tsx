@@ -26,7 +26,7 @@ export function Mancala() {
     }
 
     if (gameState.gameStatus.endOfGame) {
-        return <FinalScreen gameState={gameState} />
+        return <FinalScreen gameState={gameState} setGameState={setGameState} />
     }
 
     return <Play gameState={gameState} setGameState={setGameState} />
