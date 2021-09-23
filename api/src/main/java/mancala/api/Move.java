@@ -19,9 +19,6 @@ public class Move {
 			PlayMove playMove) {
             
         HttpSession session = request.getSession();
-        //var mancala = new MancalaImpl();
-        // String namePlayer1 = players.getNameplayer1();
-		// String namePlayer2 = players.getNameplayer2();
 		
         MancalaImpl mancala = (MancalaImpl) session.getAttribute("mancala");
         String namePlayer1 = (String) session.getAttribute("player1");

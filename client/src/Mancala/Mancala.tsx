@@ -3,6 +3,7 @@ import { StartGame } from "./StartGame";
 import { Play } from "./Play";
 import type { GameState } from "../gameState";
 import "./Mancala.css";
+import { FinalScreen } from "./FinalScreen";
 
 /**
  * The base component for the Mancala game. If there's no active game, the `StartGame` component allows
@@ -22,6 +23,10 @@ export function Mancala() {
 
     if (!gameState) {
         return <StartGame setGameState={setGameState} />
+    }
+
+    if (gameState.gameStatus.endOfGame) {
+        return <FinalScreen gameState={gameState} />
     }
 
     return <Play gameState={gameState} setGameState={setGameState} />
