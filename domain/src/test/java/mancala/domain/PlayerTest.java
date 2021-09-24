@@ -10,8 +10,6 @@ package mancala.domain;
 // and a set of assertions.
 import org.junit.jupiter.api.Test;
 
-import jdk.internal.jshell.tool.resources.version;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {

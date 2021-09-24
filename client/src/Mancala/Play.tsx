@@ -27,9 +27,9 @@ export function Play({ gameState, setGameState }: PlayProps) {
             } else {
                 console.error(response.statusText);
             }
-                } catch (error) {
-                console.error(error.toString());
-                }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     function disableButtonsP1() {    

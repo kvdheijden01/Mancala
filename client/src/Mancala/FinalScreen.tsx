@@ -27,7 +27,7 @@ export function FinalScreen({ gameState, setGameState }: PlayProps) {
                 console.error(response.statusText);
             }
         } catch (error) {
-            console.error(error.toString());
+            console.error(error);
         }
     }
 
