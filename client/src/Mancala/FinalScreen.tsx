@@ -1,5 +1,6 @@
 import React from "react";
 import type { GameState } from "../gameState";
+import "./FinalScreen.css";
 
 type PlayProps = {
     gameState: GameState;
@@ -32,10 +33,11 @@ export function FinalScreen({ gameState, setGameState }: PlayProps) {
 
     return (
         <div>
-            <p>{gameState.players[0].name} vs {gameState.players[1].name}</p>
-            <p>Winner: {gameState.gameStatus.winner}</p>
-
-            <button type = "button" onClick = {() => playAgain()}>Play Again</button>
+            <p className = "matchTitle">{gameState.players[0].name} vs {gameState.players[1].name}</p>
+            <p className = "winner">Winner: <span className = "winnerName">{gameState.gameStatus.winner}</span></p>
+            <div className = "center">
+            <button className = "playAgainButton" type = "button" onClick = {() => playAgain()}>Play Again</button>
+            </div>
         </div>
     )
 }

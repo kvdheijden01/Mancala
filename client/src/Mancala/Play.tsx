@@ -32,53 +32,61 @@ export function Play({ gameState, setGameState }: PlayProps) {
                 }
     }
 
-    function displayActivePlayer() {    
+    function disableButtonsP1() {    
         if (gameState.players[0].hasTurn) {
-            return gameState.players[0].name;
+            return false
         } else if (gameState.players[1].hasTurn) {
-            return gameState.players[1].name;
+            return true
+        }
+    }
+
+    function disableButtonsP2() {    
+        if (gameState.players[1].hasTurn) {
+            return false
+        } else if (gameState.players[0].hasTurn) {
+            return true
         }
     }
 
     return (
         <div>
-            <p>{gameState.players[0].name} vs {gameState.players[1].name}</p>
-
-            <p>Active Player: {displayActivePlayer()}</p>
-            <table>
+            <p className = "matchTitle">{gameState.players[0].name} vs {gameState.players[1].name}</p>
+            <p>
+            <table className = "center">
             <tbody>
             <tr>
                 <td>&nbsp;</td>
-                <td>&nbsp;<button type = "button" onClick = {() => playPit(12)}>{gameState.players[1].pits[5].nrOfStones}</button></td>
-                <td>&nbsp;<button type = "button" onClick = {() => playPit(11)}>{gameState.players[1].pits[4].nrOfStones}</button></td>
-                <td>&nbsp;<button type = "button" onClick = {() => playPit(10)}>{gameState.players[1].pits[3].nrOfStones}</button></td>
-                <td>&nbsp;<button type = "button" onClick = {() => playPit(9)}>{gameState.players[1].pits[2].nrOfStones}</button></td>
-                <td>&nbsp;<button type = "button" onClick = {() => playPit(8)}>{gameState.players[1].pits[1].nrOfStones}</button></td>
-                <td>&nbsp;<button type = "button" onClick = {() => playPit(7)}>{gameState.players[1].pits[0].nrOfStones}</button></td>
+                <td>&nbsp;<button className = "moveButton" type = "button" onClick = {() => playPit(12)} disabled = {disableButtonsP2()} >{gameState.players[1].pits[5].nrOfStones}</button></td>
+                <td>&nbsp;<button className = "moveButton" type = "button" onClick = {() => playPit(11)} disabled = {disableButtonsP2()}>{gameState.players[1].pits[4].nrOfStones}</button></td>
+                <td>&nbsp;<button className = "moveButton" type = "button" onClick = {() => playPit(10)} disabled = {disableButtonsP2()}>{gameState.players[1].pits[3].nrOfStones}</button></td>
+                <td>&nbsp;<button className = "moveButton" type = "button" onClick = {() => playPit(9)} disabled = {disableButtonsP2()}>{gameState.players[1].pits[2].nrOfStones}</button></td>
+                <td>&nbsp;<button className = "moveButton" type = "button" onClick = {() => playPit(8)} disabled = {disableButtonsP2()}>{gameState.players[1].pits[1].nrOfStones}</button></td>
+                <td>&nbsp;<button className = "moveButton" type = "button" onClick = {() => playPit(7)} disabled = {disableButtonsP2()}>{gameState.players[1].pits[0].nrOfStones}</button></td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td>&nbsp;{gameState.players[1].pits[6].nrOfStones}</td>
+                <td>&nbsp;<p className = "Kahala">{gameState.players[1].pits[6].nrOfStones}</p></td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td>&nbsp;{gameState.players[0].pits[6].nrOfStones}</td>
+                <td>&nbsp;<p className = "Kahala">{gameState.players[0].pits[6].nrOfStones}</p></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td>&nbsp;<button type = "button" onClick = {() => playPit(0)}>{gameState.players[0].pits[0].nrOfStones}</button></td>
-                <td>&nbsp;<button type = "button" onClick = {() => playPit(1)}>{gameState.players[0].pits[1].nrOfStones}</button></td>
-                <td>&nbsp;<button type = "button" onClick = {() => playPit(2)}>{gameState.players[0].pits[2].nrOfStones}</button></td>
-                <td>&nbsp;<button type = "button" onClick = {() => playPit(3)}>{gameState.players[0].pits[3].nrOfStones}</button></td>
-                <td>&nbsp;<button type = "button" onClick = {() => playPit(4)}>{gameState.players[0].pits[4].nrOfStones}</button></td>
-                <td>&nbsp;<button type = "button" onClick = {() => playPit(5)}>{gameState.players[0].pits[5].nrOfStones}</button></td>
+                <td>&nbsp;<button className = "moveButton" type = "button" onClick = {() => playPit(0)} disabled = {disableButtonsP1()}>{gameState.players[0].pits[0].nrOfStones}</button></td>
+                <td>&nbsp;<button className = "moveButton" type = "button" onClick = {() => playPit(1)} disabled = {disableButtonsP1()}> {gameState.players[0].pits[1].nrOfStones}</button></td>
+                <td>&nbsp;<button className = "moveButton" type = "button" onClick = {() => playPit(2)} disabled = {disableButtonsP1()}>{gameState.players[0].pits[2].nrOfStones}</button></td>
+                <td>&nbsp;<button className = "moveButton" type = "button" onClick = {() => playPit(3)} disabled = {disableButtonsP1()}>{gameState.players[0].pits[3].nrOfStones}</button></td>
+                <td>&nbsp;<button className = "moveButton" type = "button" onClick = {() => playPit(4)} disabled = {disableButtonsP1()}>{gameState.players[0].pits[4].nrOfStones}</button></td>
+                <td>&nbsp;<button className = "moveButton" type = "button" onClick = {() => playPit(5)} disabled = {disableButtonsP1()}>{gameState.players[0].pits[5].nrOfStones}</button></td>
                 <td>&nbsp;</td>
             </tr>
             </tbody>
             </table>
+            </p>
         </div>
     )
 }
